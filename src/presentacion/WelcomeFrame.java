@@ -1,74 +1,60 @@
 package presentacion;
 
+import Logica.TargetPathObservable;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JLabel;
 
-public class WelcomeFrame extends StandardFrame {
-
-    private Model model;
+public class WelcomeFrame extends TemplateFrame implements Observer {
+    
     private JLabel welcomeText;
-    private JButton readCardButton;
-    private Font welcomeTextFont;
-    private Font readCardButtonFont;
-
-    public WelcomeFrame() {
-        model = new Model();
+    private JLabel insertText;    
+    private Font labelsFont;    
+           
+    public WelcomeFrame() {        
         welcomeText = new JLabel();
-        readCardButton = new JButton();
-        welcomeTextFont = new Font("Comic Sans MS", Font.BOLD, 100);
-        readCardButtonFont = new Font("Comic Sans MS", Font.BOLD, 25);
+        insertText = new JLabel();
+        labelsFont = new Font("Comic Sans MS", Font.BOLD, 100);        
     }
-
-    public JButton getReadCardButton() {
-        return readCardButton;
-    }
-
-    public void addListener(ActionListener listener) {
-        readCardButton.addActionListener(listener);
-    }
-
-    public void addComponents() {
+    
+    @Override
+    public void addComponents() {        
         add(welcomeText);
-        add(readCardButton);
+        add(insertText);
     }
 
     public void setComponentsProperties() {
         setWelcomeTextProperties();
-        setReadCardButtonProperties();
+        setInsertTextProperties();
     }
 
     private void setWelcomeTextProperties() {
         welcomeText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.25));
         welcomeText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
         welcomeText.setForeground(Color.WHITE);
-        welcomeText.setFont(welcomeTextFont);
+        welcomeText.setFont(labelsFont);
         welcomeText.setText("Bienvenido al cajero UD");
         welcomeText.setHorizontalAlignment(JLabel.CENTER);
         welcomeText.setVerticalAlignment(JLabel.CENTER);
     }
+    
+    private void setInsertTextProperties(){
+        insertText.setLocation(welcomeText.getX(), (int) welcomeText.getY() + welcomeText.getHeight()+ 20 );
+        insertText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
+        insertText.setForeground(Color.WHITE);
+        insertText.setFont(labelsFont);
+        insertText.setText("Inserte la tarjeta");
+        insertText.setHorizontalAlignment(JLabel.CENTER);
+        insertText.setVerticalAlignment(JLabel.CENTER);
+    }    
 
-    private void setReadCardButtonProperties() {
-        readCardButton.setLocation((int) (welcomeText.getX() + welcomeText.getWidth() * 0.25), welcomeText.getY() + welcomeText.getHeight() + (int) (getHeight() * 0.10));
-        readCardButton.setSize((int) (welcomeText.getWidth() * 0.50), (int) (getHeight() * 0.10));
-        readCardButton.setFocusPainted(false);
-        readCardButton.setBackground(Color.WHITE);
-        readCardButton.setFont(readCardButtonFont);
-        readCardButton.setText("PULSE EL BOTON PARA INGRESAR CUENTA");
+    @Override
+    public void update(Observable o, Object arg) {
+        if (arg instanceof TargetPathObservable) {
+            dispose();
+        }
     }
-
-    public void setProperties() {
-        setUndecorated(true);
-        setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setBackground(new Color(Integer.parseInt("191919", 16)));
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        setResizable(false);
-        setVisible(true);
-    }
-
+    
 }
