@@ -1,9 +1,9 @@
-package Logica;
+package logica;
 
-import BaseDeDatos.Tarjeta.TarjetaDAO;
-import BaseDeDatos.Cuenta.CuentaDAO;
-import BaseDeDatos.Cuenta.CuentaDTO;
-import BaseDeDatos.Tarjeta.TarjetaDTO;
+import baseDeDatos.Tarjeta.TarjetaDAO;
+import baseDeDatos.Cuenta.CuentaDAO;
+import baseDeDatos.Cuenta.CuentaDTO;
+import baseDeDatos.Tarjeta.TarjetaDTO;
 
 public class Cajero {
 

@@ -2,25 +2,19 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.JLabel;
 
-public class WelcomeFrame extends TemplateFrame{
+public class WelcomeFrame extends TemplateFrame {
     
     private JLabel welcomeText;
     private JLabel insertText;    
     private Font labelsFont;
-    private Model model;
+    
            
-    public WelcomeFrame(Model model) {    
-        this.model = model;
+    public WelcomeFrame() {    
         welcomeText = new JLabel();
         insertText = new JLabel();
-        labelsFont = new Font("Comic Sans MS", Font.BOLD, 100);
-        this.setProperties();
-        this.setComponentsProperties();
-        this.addComponents();
+        labelsFont = new Font("Comic Sans MS", Font.BOLD, 100);        
     }
     
     @Override
@@ -45,13 +39,18 @@ public class WelcomeFrame extends TemplateFrame{
     }
     
     private void setInsertTextProperties(){
-        insertText.setLocation(welcomeText.getX(), (int) welcomeText.getY() + welcomeText.getHeight()+ 20 );
+        insertText.setLocation(welcomeText.getX(), welcomeText.getY() + welcomeText.getHeight()+ 20 );
         insertText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
         insertText.setForeground(Color.WHITE);
         insertText.setFont(labelsFont);
         insertText.setText("Inserte la tarjeta");
         insertText.setHorizontalAlignment(JLabel.CENTER);
         insertText.setVerticalAlignment(JLabel.CENTER);
-    }  
+    }
     
+    public void init() {
+    	setProperties();
+    	setComponentsProperties();
+    	addComponents();
+    }
 }

@@ -1,20 +1,23 @@
+package logica;
 
-package Logica;
+import java.util.Observable;
 
-public class CardReader {
-    
-    public boolean cardIn;
-    
-    public CardReader(){
-        this.cardIn = false;
-    }
+public class CardReader extends Observable {
 
-    public boolean isCardIn() {
-        return cardIn;
-    }
+	private boolean isCardIn;
+	
+	public CardReader() {
+		isCardIn = false;
+	}
+	
+	public boolean isCardIn() {
+		return isCardIn;
+	}
 
-    public void insertedCard(){
-        this.cardIn = true;
-    }
-    
+	public void insertCard() {
+		isCardIn = true;
+		setChanged();
+		notifyObservers();
+	}	
+
 }

@@ -1,11 +1,10 @@
-package BaseDeDatos.Cuenta;
+package baseDeDatos.Cuenta;
 
-import BaseDeDatos.Tarjeta.TarjetaDTO;
+import baseDeDatos.Tarjeta.TarjetaDTO;
 
 public interface ICuentaDAO {
 
-    public void actualizarSaldo(CuentaDTO saldoCuenta);
+	public void actualizarSaldo(CuentaDTO saldoCuenta);
 
-    public CuentaDTO obtenerCuenta(TarjetaDTO tarjeta);
-
+	public CuentaDTO obtenerCuenta(TarjetaDTO tarjeta);
 }

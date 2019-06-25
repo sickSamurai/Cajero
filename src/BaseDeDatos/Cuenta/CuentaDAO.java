@@ -1,6 +1,6 @@
-package BaseDeDatos.Cuenta;
+package baseDeDatos.Cuenta;
 
-import BaseDeDatos.Tarjeta.TarjetaDTO;
+import baseDeDatos.Tarjeta.TarjetaDTO;
 
 
  public class CuentaDAO implements ICuentaDAO {

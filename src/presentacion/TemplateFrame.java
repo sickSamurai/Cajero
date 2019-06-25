@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 
-public class TemplateFrame extends JFrame {
+public abstract class TemplateFrame extends JFrame {
         
-    public void addComponents(){}
+    public abstract void addComponents();
     
     public void setProperties() {
         setUndecorated(true);

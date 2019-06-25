@@ -1,4 +1,4 @@
-package BaseDeDatos.Cuenta;
+package baseDeDatos.Cuenta;
 
 public class CuentaDTO {
 
