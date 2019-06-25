@@ -1,33 +1,33 @@
 package logic.database.account;
 
 public class AccountDAO implements IAccountDAO {
-	
-	private static AccountDAO singleton;
 
-	private AccountDAO() {
-		//constructor vacio
-	}
+    private static AccountDAO singleton;
 
-	public static AccountDAO getInstance() {
-		if (singleton == null) {
-			singleton = new AccountDAO();
-		}
-		return singleton;
-	}
+    private AccountDAO() {
+        //constructor vacio
+    }
 
-	@Override
-	public void updateBalance(long balance) {
-		// no implementado aun
-	}
+    public static AccountDAO getInstance() {
+        if (singleton == null) {
+            singleton = new AccountDAO();
+        }
+        return singleton;
+    }
 
-	@Override
-	public AccountDTO getAccount(String accountNumber) {
-		return null;
-	}
+    @Override
+    public void updateBalance(long balance) {
+        // no implementado aun
+    }
 
-	@Override
-	public boolean getState(String accountNumber) {
-		return true;
-	}
+    @Override
+    public AccountDTO getAccount(String accountNumber) {
+        return null;
+    }
+
+    @Override
+    public boolean getState(String accountNumber) {
+        return true;
+    }
 
 }

@@ -44,7 +44,7 @@ public class PasswordFrame extends TemplateFrame {
 		passwordText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
 		passwordText.setForeground(ColorConstants.getBlack());
 		passwordText.setFont(labelsFont);
-		passwordText.setText("Ingrese su contraseña");
+		passwordText.setText("Ingrese su contraseÃ±a");
 		passwordText.setHorizontalAlignment(JLabel.CENTER);
 		passwordText.setVerticalAlignment(JLabel.CENTER);
 	}
