@@ -1,4 +1,4 @@
-package database.account;
+package logic.database.account;
 
 public class AccountDTO {
 

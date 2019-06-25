@@ -1,4 +1,4 @@
-package database.card;
+package logic.database.card;
 
 public interface ICardDAO {
 	public CardDTO getCard(String cardNumber);

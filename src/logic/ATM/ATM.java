@@ -1,9 +1,9 @@
 package logic.ATM;
 
-import database.account.AccountDAO;
-import database.account.AccountDTO;
-import database.card.CardDAO;
-import database.card.CardDTO;
+import logic.database.account.AccountDAO;
+import logic.database.account.AccountDTO;
+import logic.database.card.CardDAO;
+import logic.database.card.CardDTO;
 
 public class ATM {
 

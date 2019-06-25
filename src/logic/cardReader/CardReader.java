@@ -8,22 +8,24 @@ import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CardReader extends Observable {
+public class CardReader extends Observable implements Runnable {
 
-	private boolean isCardIn;
+	private static CardReader singleton;
+	private boolean cardIn;
 	private final File file;
+	private Thread vigilantThread;
 
-	public boolean fileExists() {
-		return file.exists();
-	}
-
-	public CardReader() {
+	private CardReader() {
+		cardIn = false;
 		file = new File("D:\\tarjeta\\numeroTarjeta.txt");
-		isCardIn = false;
+		vigilantThread = new Thread(this);
 	}
 
-	public boolean isCardIn() {
-		return isCardIn;
+	public static CardReader getInstance() {
+		if (singleton == null) {
+			singleton = new CardReader();
+		}
+		return singleton;
 	}
 
 	public String getCardNumber() {
@@ -36,9 +38,30 @@ public class CardReader extends Observable {
 	}
 
 	public void insertCard() {
-		isCardIn = true;
+		cardIn = true;
 		setChanged();
-		notifyObservers();
+	}
+
+	@Override
+	public void run() {
+		while (!cardIn) {
+			try {
+				if (file.exists()) {
+					insertCard();
+					notifyObservers();
+				} else {
+					Thread.sleep(5000);
+				}
+			} catch (InterruptedException ex) {
+				Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+				Thread.currentThread().interrupt();
+			}
+
+		}
+	}
+
+	public void start() {
+		vigilantThread.start();
 	}
 
 }

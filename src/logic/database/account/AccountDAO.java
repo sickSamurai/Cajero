@@ -1,14 +1,23 @@
-package database.account;
+package logic.database.account;
 
 public class AccountDAO implements IAccountDAO {
+	
+	private static AccountDAO singleton;
 
-	public AccountDAO() {
+	private AccountDAO() {
+		//constructor vacio
+	}
 
+	public static AccountDAO getInstance() {
+		if (singleton == null) {
+			singleton = new AccountDAO();
+		}
+		return singleton;
 	}
 
 	@Override
 	public void updateBalance(long balance) {
-		//no implementado aun
+		// no implementado aun
 	}
 
 	@Override
