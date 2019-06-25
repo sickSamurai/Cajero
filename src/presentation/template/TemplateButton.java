@@ -1,14 +1,14 @@
-package presentacion;
+package presentation.template;
 
-import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 
 public class TemplateButton extends JButton {
     
-    public TemplateButton(){
+    public TemplateButton() {
         setFocusPainted(false);
-        setBackground(Color.WHITE);
+        setBackground(ColorConstants.getBlack());
+        setForeground(ColorConstants.getWhite());
         setFont(new Font("Comic Sans MS", Font.BOLD, 25));
     }
     

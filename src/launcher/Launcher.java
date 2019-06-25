@@ -1,7 +1,7 @@
 package launcher;
 
-import presentacion.Model;
-import presentacion.WelcomeFrame;
+import presentation.model.Model;
+import presentation.view.EntryFrame;
 
 public class Launcher {
 

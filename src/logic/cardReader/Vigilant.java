@@ -1,31 +1,23 @@
+package logic.cardReader;
 
-package logica;
-
-import java.io.File;
-import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Vigilant extends Thread {
 
-	private CardReader reader;
-	private final File file;
-
-	public Vigilant() {
-		reader = new CardReader();
-		file = new File("D:\\tarjeta\\numeroTarjeta.txt");
-	}
+	private CardReader cardReader;	
 	
-	public void addObserver(Observer o) {
-		reader.addObserver(o);
+	public void setCardReader(CardReader cardReader) {
+		this.cardReader = cardReader;
 	}
 	
 	@Override
 	public void run() {
-		while (reader.isCardIn() == false) {
-			if (file.exists()) {
-				reader.insertCard();
+		while (!cardReader.isCardIn()) {
+			if (cardReader.fileExists()) {
+				cardReader.insertCard();
 				Logger.getLogger(Vigilant.class.getName()).log(Level.INFO, "La tarjeta ha sido insertada");
+				interrupt();
 			} else {
 				Logger.getLogger(Vigilant.class.getName()).log(Level.INFO, "No hay tarjeta insertada");
 				try {

@@ -1,6 +1,6 @@
-package baseDeDatos.Tarjeta;
+package database.card;
 
-public class TarjetaDTO {
+public class CardDTO {
 
 	private String clave;
 	private String numeroTarjeta;
