@@ -1,22 +1,26 @@
 package presentacion;
 
-import Logica.TargetPathObservable;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JLabel;
 
-public class WelcomeFrame extends TemplateFrame implements Observer {
+public class WelcomeFrame extends TemplateFrame{
     
     private JLabel welcomeText;
     private JLabel insertText;    
-    private Font labelsFont;    
+    private Font labelsFont;
+    private Model model;
            
-    public WelcomeFrame() {        
+    public WelcomeFrame(Model model) {    
+        this.model = model;
         welcomeText = new JLabel();
         insertText = new JLabel();
-        labelsFont = new Font("Comic Sans MS", Font.BOLD, 100);        
+        labelsFont = new Font("Comic Sans MS", Font.BOLD, 100);
+        this.setProperties();
+        this.setComponentsProperties();
+        this.addComponents();
     }
     
     @Override
@@ -48,13 +52,6 @@ public class WelcomeFrame extends TemplateFrame implements Observer {
         insertText.setText("Inserte la tarjeta");
         insertText.setHorizontalAlignment(JLabel.CENTER);
         insertText.setVerticalAlignment(JLabel.CENTER);
-    }    
-
-    @Override
-    public void update(Observable o, Object arg) {
-        if (arg instanceof TargetPathObservable) {
-            dispose();
-        }
-    }
+    }  
     
 }
