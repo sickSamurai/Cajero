@@ -1,5 +1,6 @@
 package presentation.model;
 
+import logic.ATM.ATM;
 import logic.cardReader.CardReader;
 import logic.database.account.AccountDAO;
 import logic.database.card.CardDAO;
@@ -10,11 +11,13 @@ public class Model {
 	private CardReader reader;
 	private CardDAO cardDAO;
 	private AccountDAO accountDAO;
+	private ATM atm;
 
 	private Model() {
 		reader = CardReader.getInstance();
 		cardDAO = CardDAO.getInstance();
 		accountDAO = AccountDAO.getInstance();
+		atm = ATM.getInstance();
 	}
 
 	public static Model getInstance() {
@@ -34,6 +37,19 @@ public class Model {
 
 	public boolean accountState(String cardNumber) {
 		return accountDAO.isActive(cardNumber);
+	}
+	
+	public String getActualCardNumber() {
+		return atm.getActualCardNumber();
+	}
+	public void setActualCardNumber(String actualCardNumber) {
+		atm.setActualCardNumber(actualCardNumber);
+	}
+	public String getActualAccountNumber() {
+		return atm.getActualAccountNumber();
+	}
+	public void setActualAccountNumber(String actualAccountNumber) {
+		atm.setActualAccountNumber(actualAccountNumber);
 	}
 
 }

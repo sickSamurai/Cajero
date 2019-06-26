@@ -7,18 +7,41 @@ import logic.database.card.CardDTO;
 
 public class ATM {
 
+	private static ATM singleton;
 	private AccountDAO accountDAO;
 	private CardDAO cardDAO;
 	private String actualCardNumber;
 	private String actualAccountNumber;
 
-	public ATM() {
+	private ATM() {
 		accountDAO = AccountDAO.getInstance();
 		cardDAO = CardDAO.getInstance();
 	}
 
-	public void bloquearTarjeta(AccountDTO cuenta) {
+	public static ATM getInstance() {
+		if (singleton == null)
+			singleton = new ATM();
+		return singleton;
+	}
 
+	public String getActualCardNumber() {
+		return actualCardNumber;
+	}
+
+	public void setActualCardNumber(String actualCardNumber) {
+		this.actualCardNumber = actualCardNumber;
+	}
+
+	public String getActualAccountNumber() {
+		return actualAccountNumber;
+	}
+
+	public void setActualAccountNumber(String actualAccountNumber) {
+		this.actualAccountNumber = actualAccountNumber;
+	}
+
+	public void desactivateAccount() {
+		accountDAO.desactivateAccount(actualAccountNumber);
 	}
 
 	public void realizarTransaccion(long monto, String destinyAccountNumber) {
@@ -34,11 +57,7 @@ public class ATM {
 	}
 
 	public boolean validarClave(String password) {
-		return cardDAO.passwordCorrect(actualCardNumber, password);			
-
+		return cardDAO.passwordCorrect(actualCardNumber, password);
 	}
 
-	public boolean validarRetiro(AccountDTO cuentaDTO) {
-		return false;
-	}
 }

@@ -121,5 +121,6 @@ public class AccountDAO implements IAccountDAO {
 	public boolean isActive(String cardNumber) {
 		return selectByCardNumber(cardNumber).isActive();
 	}
+	
 
 }

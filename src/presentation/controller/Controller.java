@@ -58,6 +58,8 @@ public class Controller implements ActionListener, Observer {
 		} else if (!model.accountState(cardNumber)) {
 			entryFrame.showWarningMessage("llame a su entidad");
 		} else {
+			model.setActualCardNumber(cardNumber);
+			model.setActualAccountNumber(cardNumber);			
 			changeFrame(entryFrame, operationFrame);
 		}
 
@@ -76,6 +78,9 @@ public class Controller implements ActionListener, Observer {
 			} else if (Integer.parseInt(transferFrame.getTxtMonto().getText()) < 50000) {
 				JOptionPane.showMessageDialog(transferFrame, "La Transferencia minima es de $50.000");
 			} else {
+				long monto = Long.parseLong(transferFrame.getTxtMonto().getText());
+				String numeroCuentaDestino = (transferFrame.getTxtNumeroCuenta().getText());
+				
 				changeFrame(transferFrame, passwordFrame);
 			}
 		}
