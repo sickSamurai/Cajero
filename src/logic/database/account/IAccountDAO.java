@@ -2,9 +2,17 @@ package logic.database.account;
 
 public interface IAccountDAO {
 
-	public void updateBalance(long saldoCuenta);
+	public AccountDTO selectByCardNumber(String cardNumber);
 
-	public AccountDTO selectAccount(String numeroCuenta);
-	
-	public boolean isActive(String numeroCuenta);	
+	public AccountDTO selectByAccountNumber(String accountNumber);
+
+	public long getBalance(String numeroCuenta);
+
+	public void updateBalance(String numeroCuenta, long saldoCuenta);
+
+	public void desactivateAccount(String accountNumber);
+
+	public boolean isActive(String cardNumber);
+
+	public boolean passwordCorrect(String accountNumber, String password);
 }

@@ -31,7 +31,7 @@ public class AccountDTO {
 		return cardNumber;
 	}
 
-	public long getBalanceAviable() {
+	public long getBalance() {
 		return balanceAviable;
 	}
 	

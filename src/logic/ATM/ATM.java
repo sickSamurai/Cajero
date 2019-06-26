@@ -7,35 +7,33 @@ import logic.database.card.CardDTO;
 
 public class ATM {
 
-	private AccountDTO cuentaDTO;
-	private long dineroDisponible;
-	private CardDTO tarjetaDTO;
-	public CardDAO m_TarjetaDAO;
-	public AccountDAO m_CuentaDAO;
-	public CardDTO m_TarjetaDTO;
-	public AccountDTO m_CuentaDTO;
+	private AccountDAO accountDAO;
+	private CardDAO cardDAO;
 
-	public ATM(){
-
+	public ATM() {
+		accountDAO = AccountDAO.getInstance();
+		cardDAO = CardDAO.getInstance();
 	}
-        public void bloquearTarjeta(AccountDTO cuenta){
+
+	public void bloquearTarjeta(AccountDTO cuenta) {
 
 	}
 
-	public boolean cuentaActiva(AccountDTO cuentaDTO){
-		return false;
-	}
-        
-	public long realizarTransaccion(int monto, AccountDTO cuenta){
-		return 0;
-	}
-
-	public long retirarDinero(long monto){
-		return 0;
+	public void realizarTransaccion(long monto, String originAccountNumber, String destinyAccountNumber) {
+		long originBalance = accountDAO.getBalance(originAccountNumber) - monto; 
+		long destinyBalance = accountDAO.getBalance(destinyAccountNumber) + monto;
+		accountDAO.updateBalance(originAccountNumber, originBalance);
+		accountDAO.updateBalance(destinyAccountNumber, destinyBalance);
 	}
 
-	public boolean validarClave(String clave, int intentos){
-		return false;
+	public void retirarDinero(String accountNumber, long monto) {
+		long newBalance = accountDAO.getBalance(accountNumber) - monto;
+		accountDAO.updateBalance(accountNumber, newBalance);
+	}
+
+	public boolean validarClave(String clave) {
+		int intentos = 0;
+
 	}
 
 	public boolean validarRetiro(AccountDTO cuentaDTO) {
