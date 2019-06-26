@@ -4,7 +4,8 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import presentation.template.ColorConstants;
+
+import presentation.constant.ColorConstant;
 import presentation.template.TemplateButton;
 import presentation.template.TemplateFrame;
 
@@ -94,7 +95,7 @@ public class WithdrawFrame extends TemplateFrame {
     private void setAmountTextProperties() {
         amountText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.15));
         amountText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
-        amountText.setForeground(ColorConstants.getBlack());
+        amountText.setForeground(ColorConstant.getBlack());
         amountText.setFont(labelsFont);
         amountText.setText("Elige un monto");
         amountText.setHorizontalAlignment(JLabel.CENTER);

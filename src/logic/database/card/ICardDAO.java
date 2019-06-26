@@ -1,6 +1,8 @@
 package logic.database.card;
 
+import java.sql.SQLException;
+
 public interface ICardDAO {
-	public CardDTO getCard(String cardNumber);
+	public CardDTO selectCard(String cardNumber) throws SQLException;
 	public boolean cardExists(String cardNumber);
 }

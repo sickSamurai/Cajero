@@ -5,72 +5,72 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import presentation.template.ColorConstants;
+import presentation.constant.ColorConstant;
 import presentation.template.TemplateButton;
 import presentation.template.TemplateFrame;
 
 public class OperationFrame extends TemplateFrame {
 
-    private JLabel operationText;
-    private Font labelsFont;
-    private JButton withdrawButton;
-    private JButton transferButton;
+	private JLabel operationText;
+	private Font labelsFont;
+	private JButton withdrawButton;
+	private JButton transferButton;
 
-    public OperationFrame() {
-        operationText = new JLabel();
-        withdrawButton = new TemplateButton();
-        transferButton = new TemplateButton();
-        labelsFont = new Font("Comic Sans MS", Font.BOLD, 70);
-    }
+	public OperationFrame() {
+		operationText = new JLabel();
+		withdrawButton = new TemplateButton();
+		transferButton = new TemplateButton();
+		labelsFont = new Font("Comic Sans MS", Font.BOLD, 70);
+	}
 
-    public JButton getWithdrawButton() {
-        return withdrawButton;
-    }
+	public JButton getWithdrawButton() {
+		return withdrawButton;
+	}
 
-    public JButton getTransferButton() {
-        return transferButton;
-    }
+	public JButton getTransferButton() {
+		return transferButton;
+	}
 
-    @Override
-    public void addComponents() {
-        add(operationText);
-        add(withdrawButton);
-        add(transferButton);
-    }
+	private void setOperationTextProperties() {
+		operationText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.25));
+		operationText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
+		operationText.setForeground(ColorConstant.getBlack());
+		operationText.setFont(labelsFont);
+		operationText.setText("¿Qué desea hacer?");
+		operationText.setHorizontalAlignment(JLabel.CENTER);
+		operationText.setVerticalAlignment(JLabel.CENTER);
+	}
 
-    public void addActionListener(ActionListener listener) {
-        withdrawButton.addActionListener(listener);
-        transferButton.addActionListener(listener);
-    }
+	private void setWithdrawButtonProperties() {
+		withdrawButton.setLocation((int) (getWidth() * 0.72), (int) (getHeight() * 0.50));
+		withdrawButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
+		withdrawButton.setText("Retirar dinero");
 
-    @Override
-    public void setComponentsProperties() {
-        setOperationTextProperties();
-        setWithdrawButtonProperties();
-        setTransferButtonProperties();
-    }
+	}
 
-    private void setOperationTextProperties() {
-        operationText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.25));
-        operationText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
-        operationText.setForeground(ColorConstants.getBlack());
-        operationText.setFont(labelsFont);
-        operationText.setText("¿Qué desea hacer?");
-        operationText.setHorizontalAlignment(JLabel.CENTER);
-        operationText.setVerticalAlignment(JLabel.CENTER);
-    }
+	private void setTransferButtonProperties() {
+		transferButton.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.50));
+		transferButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
+		transferButton.setText("Transferir dinero");
+	}
 
-    private void setWithdrawButtonProperties() {
-        withdrawButton.setLocation((int) (getWidth() * 0.72), (int) (getHeight() * 0.50));
-        withdrawButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
-        withdrawButton.setText("Retirar dinero");
+	@Override
+	public void setComponentsProperties() {
+		setOperationTextProperties();
+		setWithdrawButtonProperties();
+		setTransferButtonProperties();
+	}
 
-    }
+	@Override
+	public void addComponents() {
+		add(operationText);
+		add(withdrawButton);
+		add(transferButton);
+	}
 
-    private void setTransferButtonProperties() {
-        transferButton.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.50));
-        transferButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
-        transferButton.setText("Transferir dinero");
-    }
+	public void addController(ActionListener listener) {
+		withdrawButton.addActionListener(listener);
+		transferButton.addActionListener(listener);
+	}
 
 }

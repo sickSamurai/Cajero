@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
-import presentation.template.ColorConstants;
+import presentation.constant.ColorConstant;
 import presentation.template.TemplateButton;
 import presentation.template.TemplateFrame;
 
@@ -42,7 +42,7 @@ public class PasswordFrame extends TemplateFrame {
 	private void setPasswordTextProperties() {
 		passwordText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.25));
 		passwordText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
-		passwordText.setForeground(ColorConstants.getBlack());
+		passwordText.setForeground(ColorConstant.getBlack());
 		passwordText.setFont(labelsFont);
 		passwordText.setText("Ingrese su contraseña");
 		passwordText.setHorizontalAlignment(JLabel.CENTER);

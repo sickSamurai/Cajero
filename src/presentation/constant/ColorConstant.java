@@ -1,10 +1,10 @@
-package presentation.template;
+package presentation.constant;
 
 import java.awt.Color;
 
-public class ColorConstants {
+public class ColorConstant {
 	
-	private ColorConstants() {}
+	private ColorConstant() {}
 	
 	public static Color getBlack() {
 		return new Color(Integer.parseInt("191919", 16));

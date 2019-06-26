@@ -1,10 +1,9 @@
 package launcher;
 
 import logic.cardReader.CardReader;
-import presentation.controllers.OperationFrameController;
-import presentation.controllers.TransferFrameController;
-import presentation.controllers.WithdrawFrameController;
-import presentation.model.ViewManager;
+import logic.database.connector.Conector;
+import presentation.controller.Controller;
+import presentation.model.Model;
 import presentation.view.EntryFrame;
 import presentation.view.OperationFrame;
 import presentation.view.PasswordFrame;
@@ -13,28 +12,37 @@ import presentation.view.WithdrawFrame;
 
 public class Launcher {
 
-    public static void main(String[] args) {
-        ViewManager manager = ViewManager.getInstance();
-        EntryFrame entryFrame = new EntryFrame();
-        OperationFrame operationFrame = new OperationFrame();
-        OperationFrameController operationController = new OperationFrameController();
-        TransferFrameController transferController = new TransferFrameController();
-        WithdrawFrame withDraw = new WithdrawFrame();
-        PasswordFrame passwordFrame = new PasswordFrame();
-        TransferFrame transferFrame = new TransferFrame();
-        CardReader cardReader = CardReader.getInstance();        
-        manager.setEntryFrame(entryFrame);
-        operationFrame.addActionListener(operationController);
-        transferFrame.addActionListener(transferController);
-        manager.setOperationFrame(operationFrame);
-        operationController.setOperationFrame(operationFrame);
-        transferController.setTransferFrame(transferFrame);
-        manager.setWithdrawFrame(withDraw);
-        manager.setPasswordFrame(passwordFrame);   
-        manager.setTransferFrame(transferFrame);
-        manager.showEntryFrame();
-        cardReader.addObserver(manager);
-        cardReader.start();
-    }
+	private static EntryFrame entryFrame = new EntryFrame();
+	private static OperationFrame operationFrame = new OperationFrame();
+	private static TransferFrame transferFrame = new TransferFrame();
+	private static WithdrawFrame withdrawFrame = new WithdrawFrame();
+	private static PasswordFrame passwordFrame = new PasswordFrame();
+	private static Controller controller = new Controller();
+	private static CardReader reader = CardReader.getInstance();	
+
+	public static void initController() {
+		controller.setEntryFrame(entryFrame);
+		controller.setOperationFrame(operationFrame);
+		controller.setTransferFrame(transferFrame);
+		controller.setWithdrawFrame(withdrawFrame);
+		controller.setPasswordFrame(passwordFrame);
+		controller.init();
+	}
+
+	public static void startReader() {
+		reader.addObserver(controller);
+		reader.start();
+	}
+	
+	public static void setConectorValues() {
+		Conector.setValues("jdbc:postgresql://localhost/banco", "postgres", "1957");
+	}
+
+	public static void main(String[] args) {
+		Launcher.setConectorValues();
+		Launcher.initController();
+		Launcher.startReader();		
+		entryFrame.init();
+	}
 
 }
