@@ -2,9 +2,12 @@
 package presentation.view;
 
 import java.awt.Font;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
+import presentation.template.TemplateButton;
 import presentation.template.TemplateFrame;
 
 public class TransferFrame extends TemplateFrame{
@@ -12,22 +15,28 @@ public class TransferFrame extends TemplateFrame{
     private Font font;
     private JLabel lblNumeroCuenta;
     private JLabel lblMonto;
-    private JFormattedTextField txtNumeroCuenta;
-    private JFormattedTextField txtMonto;
+    private JTextField txtNumeroCuenta;
+    private JTextField txtMonto;
+    private TemplateButton btnContinue;
     
     public TransferFrame(){
         this.font = new Font("Comic Sans MS", Font.BOLD, 25);
         this.lblNumeroCuenta = new JLabel();
         this.lblMonto = new JLabel();
-        this.txtMonto = new JFormattedTextField(new Integer(0));
-        this.txtNumeroCuenta = new JFormattedTextField(new Integer(0));
-        this.init();   
+        this.txtMonto = new JTextField();
+        this.txtNumeroCuenta = new JTextField();
+        this.btnContinue = new TemplateButton();
+        this.validarTexto(txtMonto);
+        this.validarTexto(txtNumeroCuenta);
     }
 
     @Override
     public void addComponents() {
         this.add(lblNumeroCuenta);
         this.add(lblMonto);
+        this.add(txtNumeroCuenta);
+        this.add(txtMonto);
+        this.add(btnContinue);
     }
 
     @Override
@@ -36,32 +45,70 @@ public class TransferFrame extends TemplateFrame{
         this.setLblMontoProperties();
         this.setTxtNumeroCuentaProperties();
         this.setTxtMontoProperties();
+        this.setBtnContinueProperties();
     }
 
     private void setLblNumeroCuentaProperties() {
         this.lblNumeroCuenta.setFont(font);
         this.lblNumeroCuenta.setText("Ingrese el número de cuenta Destino:");
-        this.lblNumeroCuenta.setSize((int) (this.getWidth() * 0.25), (int) (this.getHeight()* 0.1));
-        this.lblNumeroCuenta.setLocation((int) (this.getWidth() * 0.25), (int) (this.getHeight()* 0.3));
+        this.lblNumeroCuenta.setSize((int) (this.getWidth() * 0.45), (int) (this.getHeight()* 0.05));
+        this.lblNumeroCuenta.setLocation((int) (this.getWidth() * 0.33), (int) (this.getHeight()* 0.25));
     }
 
     private void setLblMontoProperties() {
         this.lblMonto.setFont(font);
-        this.lblMonto.setText("Ingrese el Valor a Transferir");
-        this.lblMonto.setSize((int) (this.getWidth() * 0.25), (int) (this.getHeight()* 0.1));
-        this.lblMonto.setLocation((int) (this.getWidth() * 0.5), (int) (this.getHeight()* 0.3));
+        this.lblMonto.setText("Ingrese el Valor a Transferir:");
+        this.lblMonto.setSize((int) (this.getWidth() * 0.45), (int) (this.getHeight()* 0.05));
+        this.lblMonto.setLocation((int) (this.getWidth() * 0.37), (int) (this.getHeight()* 0.5));
     }
 
     private void setTxtNumeroCuentaProperties() {
         this.txtNumeroCuenta.setFont(font);
-        this.txtNumeroCuenta.setSize((int) (this.getWidth() * 0.3), (int) (this.getHeight()* 0.1));
-        this.txtNumeroCuenta.setLocation((int) (this.getWidth() * 0.35), (int) (this.getHeight()* 0.3));
+        this.txtNumeroCuenta.setSize((int) (this.getWidth() * 0.3), (int) (this.getHeight()* 0.05));
+        this.txtNumeroCuenta.setLocation((int) (this.getWidth() * 0.35), (int) (this.getHeight()* 0.35));
     }
 
     private void setTxtMontoProperties() {
         this.txtMonto.setFont(font);
-        this.txtMonto.setSize((int) (this.getWidth() * 0.3), (int) (this.getHeight()* 0.1));
-        this.txtMonto.setLocation((int) (this.getWidth() * 0.35), (int) (this.getHeight()* 0.3));
+        this.txtMonto.setSize((int) (this.getWidth() * 0.3), (int) (this.getHeight()* 0.05));
+        this.txtMonto.setLocation((int) (this.getWidth() * 0.35), (int) (this.getHeight()* 0.60));
+    }
+
+    private void validarTexto(JTextField txt) {
+        txt.addKeyListener(new KeyAdapter()
+        {
+           public void keyTyped(KeyEvent e)
+           {
+              char caracter = e.getKeyChar();
+              if(((caracter < '0') ||
+                 (caracter > '9')) &&
+                 (caracter != '\b'))
+              {
+                 e.consume();
+              }
+           }
+        });
+    }
+
+    private void setBtnContinueProperties() {
+        this.btnContinue.setSize((int) (this.getWidth() * 0.20), (int) (this.getHeight()* 0.1));
+        this.btnContinue.setLocation((int) (this.getWidth() * 0.40), (int) (this.getHeight()* 0.80));
+        this.btnContinue.setText("Continuar");
+    }
+
+    public TemplateButton getBtnContinue() {
+        return btnContinue;
+    }
+
+    public JTextField getTxtNumeroCuenta() {
+        return txtNumeroCuenta;
+    }
+
+    public JTextField getTxtMonto() {
+        return txtMonto;
     }
     
+    public void addActionListener(ActionListener listener) {
+        btnContinue.addActionListener(listener);
+    }
 }

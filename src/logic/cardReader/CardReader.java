@@ -17,7 +17,7 @@ public class CardReader extends Observable implements Runnable {
 
     private CardReader() {
         cardIn = false;
-        file = new File("D:\\tarjeta\\numeroTarjeta.txt");
+        file = new File("G:\\tarjeta\\numeroTarjeta.txt");
         vigilantThread = new Thread(this);
     }
 

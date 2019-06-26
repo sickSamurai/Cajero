@@ -14,12 +14,12 @@ public class OperationFrame extends TemplateFrame {
     private JLabel operationText;
     private Font labelsFont;
     private JButton withdrawButton;
-    private JButton insertButton;
+    private JButton transferButton;
 
     public OperationFrame() {
         operationText = new JLabel();
         withdrawButton = new TemplateButton();
-        insertButton = new TemplateButton();
+        transferButton = new TemplateButton();
         labelsFont = new Font("Comic Sans MS", Font.BOLD, 70);
     }
 
@@ -27,28 +27,27 @@ public class OperationFrame extends TemplateFrame {
         return withdrawButton;
     }
 
-    public JButton getInsertButton() {
-        return insertButton;
+    public JButton getTransferButton() {
+        return transferButton;
     }
 
     @Override
     public void addComponents() {
         add(operationText);
         add(withdrawButton);
-        add(insertButton);
+        add(transferButton);
     }
 
     public void addActionListener(ActionListener listener) {
         withdrawButton.addActionListener(listener);
-        insertButton.addActionListener(listener);
+        transferButton.addActionListener(listener);
     }
 
     @Override
     public void setComponentsProperties() {
         setOperationTextProperties();
         setWithdrawButtonProperties();
-        setInsertButtonProperties();
-
+        setTransferButtonProperties();
     }
 
     private void setOperationTextProperties() {
@@ -68,11 +67,10 @@ public class OperationFrame extends TemplateFrame {
 
     }
 
-    private void setInsertButtonProperties() {
-        insertButton.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.50));
-        insertButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
-        insertButton.setText("Insertar dinero");
-
+    private void setTransferButtonProperties() {
+        transferButton.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.50));
+        transferButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
+        transferButton.setText("Transferir dinero");
     }
 
 }

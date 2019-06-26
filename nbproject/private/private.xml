@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jorge/OneDrive/Escritorio/Programas/Cajero-master/src/presentacion/Model.java</file>
-            <file>file:/C:/Users/Jorge/OneDrive/Escritorio/Programas/Cajero-master/src/launcher/Launcher.java</file>
-            <file>file:/C:/Users/Jorge/OneDrive/Escritorio/Programas/Cajero-master/src/presentacion/WelcomeFrame.java</file>
+            <file>file:/C:/Users/Jorge/OneDrive/Documentos/GitHub/Cajero/src/presentation/view/OperationFrame.java</file>
+            <file>file:/C:/Users/Jorge/OneDrive/Documentos/GitHub/Cajero/src/presentation/view/PasswordFrame.java</file>
+            <file>file:/C:/Users/Jorge/OneDrive/Documentos/GitHub/Cajero/src/presentation/controllers/OperationFrameController.java</file>
+            <file>file:/C:/Users/Jorge/OneDrive/Documentos/GitHub/Cajero/src/launcher/Launcher.java</file>
+            <file>file:/C:/Users/Jorge/OneDrive/Documentos/GitHub/Cajero/src/presentation/controllers/WithdrawFrameController.java</file>
+            <file>file:/C:/Users/Jorge/OneDrive/Documentos/GitHub/Cajero/src/presentation/model/ViewManager.java</file>
+            <file>file:/C:/Users/Jorge/OneDrive/Documentos/GitHub/Cajero/src/presentation/controllers/TransferFrameController.java</file>
+            <file>file:/C:/Users/Jorge/OneDrive/Documentos/GitHub/Cajero/src/presentation/view/TransferFrame.java</file>
         </group>
     </open-files>
 </project-private>

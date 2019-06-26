@@ -25,6 +25,8 @@ public class OperationFrameController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == frame.getWithdrawButton()){
             updater.goToWithdrawFrame();
+        }else if(e.getSource() == frame.getTransferButton()){
+            updater.goToTransferFrame();
         }
     }
     

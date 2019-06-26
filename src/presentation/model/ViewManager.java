@@ -2,11 +2,13 @@ package presentation.model;
 
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JFrame;
 import logic.facade.LogicFacade;
 import presentation.view.WithdrawFrame;
 import presentation.view.OperationFrame;
 import presentation.view.PasswordFrame;
 import presentation.view.EntryFrame;
+import presentation.view.TransferFrame;
 
 public class ViewManager implements Observer {
 
@@ -16,6 +18,7 @@ public class ViewManager implements Observer {
     private OperationFrame operationFrame;
     private PasswordFrame passwordFrame;
     private WithdrawFrame withdrawFrame;
+    private TransferFrame transferFrame;
 
     private ViewManager() {
         facade = LogicFacade.getInstance();
@@ -43,6 +46,10 @@ public class ViewManager implements Observer {
     public void setWithdrawFrame(WithdrawFrame withdrawFrame) {
         this.withdrawFrame = withdrawFrame;
     }
+    
+    public void setTransferFrame(TransferFrame transferFrame) {
+        this.transferFrame = transferFrame;
+    }
 
     public void showEntryFrame() {
         entryFrame.init();
@@ -60,7 +67,17 @@ public class ViewManager implements Observer {
     public void goToWithdrawFrame() {
         operationFrame.dispose();
         withdrawFrame.init();
-    }        
+    }
+    
+    public void goToTransferFrame() {
+        operationFrame.dispose();
+        transferFrame.init();
+    }
+    
+    public void goToPasswordFrame(){
+        transferFrame.dispose();
+        passwordFrame.init();
+    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -73,5 +90,5 @@ public class ViewManager implements Observer {
             goToOperationFrame();            
         }
     }
-
+    
 }
