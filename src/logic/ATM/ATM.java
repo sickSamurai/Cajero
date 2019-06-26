@@ -9,6 +9,8 @@ public class ATM {
 
 	private AccountDAO accountDAO;
 	private CardDAO cardDAO;
+	private String actualCardNumber;
+	private String actualAccountNumber;
 
 	public ATM() {
 		accountDAO = AccountDAO.getInstance();
@@ -19,20 +21,20 @@ public class ATM {
 
 	}
 
-	public void realizarTransaccion(long monto, String originAccountNumber, String destinyAccountNumber) {
-		long originBalance = accountDAO.getBalance(originAccountNumber) - monto; 
+	public void realizarTransaccion(long monto, String destinyAccountNumber) {
+		long originBalance = accountDAO.getBalance(actualAccountNumber) - monto;
 		long destinyBalance = accountDAO.getBalance(destinyAccountNumber) + monto;
-		accountDAO.updateBalance(originAccountNumber, originBalance);
+		accountDAO.updateBalance(actualAccountNumber, originBalance);
 		accountDAO.updateBalance(destinyAccountNumber, destinyBalance);
 	}
 
-	public void retirarDinero(String accountNumber, long monto) {
-		long newBalance = accountDAO.getBalance(accountNumber) - monto;
-		accountDAO.updateBalance(accountNumber, newBalance);
+	public void retirarDinero(long monto) {
+		long newBalance = accountDAO.getBalance(actualAccountNumber) - monto;
+		accountDAO.updateBalance(actualAccountNumber, newBalance);
 	}
 
-	public boolean validarClave(String clave) {
-		int intentos = 0;
+	public boolean validarClave(String password) {
+		return cardDAO.passwordCorrect(actualCardNumber, password);			
 
 	}
 

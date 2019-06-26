@@ -50,4 +50,9 @@ public class CardDAO implements ICardDAO {
 		return selectCard(cardNumber).getNumeroTarjeta() != null;
 	}
 
+	@Override
+	public boolean passwordCorrect(String cardNumber, String password) {
+		return password.equals(selectCard(cardNumber).getClave());
+	}
+
 }

@@ -13,6 +13,5 @@ public interface IAccountDAO {
 	public void desactivateAccount(String accountNumber);
 
 	public boolean isActive(String cardNumber);
-
-	public boolean passwordCorrect(String accountNumber, String password);
+	
 }
