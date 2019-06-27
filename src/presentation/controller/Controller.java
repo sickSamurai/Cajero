@@ -22,6 +22,10 @@ public class Controller implements ActionListener, Observer {
 	private PasswordFrame passwordFrame;
 	private Session session;
 
+	public Controller() {
+		session = new Session();
+	}
+	
 	public void setEntryFrame(EntryFrame entryFrame) {
 		this.entryFrame = entryFrame;
 	}
@@ -57,7 +61,7 @@ public class Controller implements ActionListener, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		String readedNumber = ((CardReader) o).readNumber();
-		session = new Session(readedNumber);
+		session.setCardNumber(readedNumber);
 		if (!session.cardExists(readedNumber)) {
 			entryFrame.showWarningMessage("La tarjeta no esta registrada");
 		} else if (!session.isCardActive()) {
@@ -70,11 +74,11 @@ public class Controller implements ActionListener, Observer {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == operationFrame.getTransferButton()) {
-			session.setOption(1);
+			session.setOperation(1);
 			changeFrame(operationFrame, transferFrame);
 		}
 		if (e.getSource() == operationFrame.getWithdrawButton()) {
-			session.setOption(2);
+			session.setOperation(2);
 			changeFrame(operationFrame, withdrawFrame);
 		}
 		if (e.getSource() == withdrawFrame.getButton10k()) {

@@ -55,4 +55,21 @@ public class CardPostgresqlDAO implements ICardDAO {
 		return password.equals(selectCard(cardNumber).getPassword());
 	}
 
+	@Override
+	public void desactivateCard(String cardNumber) {
+		try {
+			Conector.tryConnect();
+			Connection connection = Conector.getConnection();
+			String sentence = "UPDATE tarjeta SET esta_activa=? WHERE numero_tarjeta=?";
+			PreparedStatement statement = connection.prepareStatement(sentence);
+			statement.setBoolean(1, false);
+			statement.setString(2, cardNumber);
+			String rowsAfected = Integer.toString(statement.executeUpdate());
+			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, rowsAfected);
+		} catch (SQLException e) {
+			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getMessage());
+		} finally {
+			Conector.tryClose();
+		}
+	}
 }

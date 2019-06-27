@@ -8,4 +8,5 @@ public interface ICardDAO {
 	public boolean isCardActive(String cardNumber);
 	public boolean passwordCorrect(String accountNumber, String password);
 	public String accountNumberAssociated(String cardNumber);
+	public void desactivateCard(String cardNumber);
 }

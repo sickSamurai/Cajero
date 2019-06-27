@@ -6,33 +6,31 @@ import logic.database.card.CardPostgresqlDAO;
 import logic.database.card.ICardDAO;
 
 public class Session {
-	
-	private String actualCardNumber;	
+
+	private String actualCardNumber;
+	private int operationSelected;
 	private IAccountDAO accountDAO;
 	private ICardDAO cardDAO;
-	private int optionSelected;
-	private int failedAttemps;
-	
-	public Session(String cardNumber) {
-		this.actualCardNumber = cardNumber;
+
+	public Session() {
 		accountDAO = new AccountPostgresqlDAO();
 		cardDAO = new CardPostgresqlDAO();
 	}
-	
+
+	public void setCardNumber(String cardNumber) {
+		this.actualCardNumber = cardNumber;
+	}
+
 	public String getActualCardNumber() {
 		return actualCardNumber;
 	}
-	
-	public int getOptionSelected() {
-		return optionSelected;
+
+	public int getOperationSelected() {
+		return operationSelected;
 	}
-	
-	public int getFailedAttemps() {
-		return failedAttemps;
-	}
-	
-	public void setOption(int option) {
-		optionSelected = option;
+
+	public void setOperation(int option) {
+		operationSelected = option;
 	}
 
 	public boolean cardExists(String cardNumber) {
@@ -43,7 +41,11 @@ public class Session {
 		return cardDAO.isCardActive(actualCardNumber);
 	}
 
-	public boolean passwordCorrect(String password) {
+	public void desactiveCard() {
+		cardDAO.desactivateCard(actualCardNumber);
+	}
+
+	public boolean isPasswordCorrect(String password) {
 		return cardDAO.passwordCorrect(actualCardNumber, password);
 	}
 
@@ -53,13 +55,13 @@ public class Session {
 		long destinyBalance = accountDAO.selectBalance(destinyAccountNumber);
 		return originBalance >= destinyBalance;
 	}
-	
+
 	public boolean transferAccountExists(String destinyAccountNumber) {
 		return accountDAO.selectByAccountNumber(destinyAccountNumber).getAccountNumber() != null;
 	}
-	
+
 	public void transfer(long amount, String destinyAccountNumber) {
-		String originAccountNumber = cardDAO.accountNumberAssociated(actualCardNumber);		
+		String originAccountNumber = cardDAO.accountNumberAssociated(actualCardNumber);
 		long updatedActualBalance = accountDAO.selectBalance(originAccountNumber) - amount;
 		long destinyBalance = accountDAO.selectBalance(destinyAccountNumber) + amount;
 		accountDAO.updateBalance(originAccountNumber, updatedActualBalance);
@@ -71,5 +73,5 @@ public class Session {
 		long newBalance = accountDAO.selectBalance(actualAccountNumber) - amount;
 		accountDAO.updateBalance(actualAccountNumber, newBalance);
 	}
-	
+
 }
