@@ -27,7 +27,7 @@ public class AccountPostgresqlDAO implements IAccountDAO {
 			if (result.next()) {
 				account.setAccountNumber(result.getString("numero_cuenta"));				
 				account.setBalance(result.getLong("saldo"));				
-			}
+			} 
 		} catch (SQLException e) {
 			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getMessage());
 		} finally {

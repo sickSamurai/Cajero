@@ -1,6 +1,7 @@
 package presentation.view;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -35,19 +36,6 @@ public class WithdrawFrame extends TemplateFrame {
         labelsFont = new Font("Comic Sans MS", Font.BOLD, 70);
     }
 
-    @Override
-    public void addComponents() {
-        add(amountText);
-        add(button10k);
-        add(button30k);
-        add(button60k);
-        add(button80k);
-        add(button100k);
-        add(button200k);
-        add(button300k);
-        add(otherButton);
-    }
-
     public JButton getButton10k() {
         return button10k;
     }
@@ -78,18 +66,6 @@ public class WithdrawFrame extends TemplateFrame {
 
     public JButton getOtherButton() {
         return otherButton;
-    }
-
-    public void setComponentsProperties() {
-        setAmountTextProperties();
-        setButton10kProperties();
-        setButton30kProperties();
-        setButton60kProperties();
-        setButton80kProperties();
-        setButton100kProperties();
-        setButton200kProperties();
-        setButton300kProperties();
-        setOtherButtonProperties();
     }
 
     private void setAmountTextProperties() {
@@ -155,6 +131,43 @@ public class WithdrawFrame extends TemplateFrame {
         otherButton.setLocation((int) (getWidth() * 0.67), (int) (getHeight() * 0.80));
         otherButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
         otherButton.setText("Otro");
+    }
+    
+    @Override
+    public void setComponentsProperties() {
+        setAmountTextProperties();
+        setButton10kProperties();
+        setButton30kProperties();
+        setButton60kProperties();
+        setButton80kProperties();
+        setButton100kProperties();
+        setButton200kProperties();
+        setButton300kProperties();
+        setOtherButtonProperties();
+    }
+    
+    @Override
+    public void addComponents() {
+        add(amountText);
+        add(button10k);
+        add(button30k);
+        add(button60k);
+        add(button80k);
+        add(button100k);
+        add(button200k);      
+        add(button300k);
+        add(otherButton);
+    }
+    
+    public void addController(ActionListener listener) {
+    	button10k.addActionListener(listener);
+    	button30k.addActionListener(listener);
+    	button60k.addActionListener(listener);
+    	button80k.addActionListener(listener);
+    	button100k.addActionListener(listener);
+    	button200k.addActionListener(listener);
+    	button300k.addActionListener(listener);
+    	otherButton.addActionListener(listener);
     }
 
 }

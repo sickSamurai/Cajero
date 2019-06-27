@@ -2,6 +2,7 @@ package presentation.view;
 
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -40,6 +41,10 @@ public class PasswordFrame extends TemplateFrame {
 		add(passwordButton);
 	}
 
+	public void addController(ActionListener listener) {
+		passwordButton.addActionListener(listener);
+	}
+	
 	@Override
 	public void setComponentsProperties() {
 		setPasswordTextProperties();

@@ -48,7 +48,7 @@ public class TransferFrame extends TemplateFrame {
 
 	private void setLblNumeroCuentaProperties() {
 		this.lblNumeroCuenta.setFont(font);
-		this.lblNumeroCuenta.setText("Ingrese el número de cuenta Destino:");
+		this.lblNumeroCuenta.setText("Ingrese el numero de cuenta Destino:");
 		this.lblNumeroCuenta.setSize((int) (this.getWidth() * 0.45), (int) (this.getHeight() * 0.05));
 		this.lblNumeroCuenta.setLocation((int) (this.getWidth() * 0.33), (int) (this.getHeight() * 0.25));
 	}

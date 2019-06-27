@@ -36,21 +36,21 @@ public class OperationFrame extends TemplateFrame {
 		operationText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
 		operationText.setForeground(ColorConstant.BLACK);
 		operationText.setFont(labelsFont);
-		operationText.setText("¿Qué desea hacer?");
+		operationText.setText("Seleccione la operacion a realizar");
 		operationText.setHorizontalAlignment(JLabel.CENTER);
 		operationText.setVerticalAlignment(JLabel.CENTER);
 	}
 
 	private void setWithdrawButtonProperties() {
 		withdrawButton.setLocation((int) (getWidth() * 0.72), (int) (getHeight() * 0.50));
-		withdrawButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
+		withdrawButton.setSize((int) (getWidth() * 0.15), (int) (getHeight() * 0.10));
 		withdrawButton.setText("Retirar dinero");
 
 	}
 
 	private void setTransferButtonProperties() {
 		transferButton.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.50));
-		transferButton.setSize((int) (getWidth() * 0.125), (int) (getHeight() * 0.10));
+		transferButton.setSize((int) (getWidth() * 0.15), (int) (getHeight() * 0.10));
 		transferButton.setText("Transferir dinero");
 	}
 

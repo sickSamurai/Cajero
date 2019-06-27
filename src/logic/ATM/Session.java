@@ -54,6 +54,10 @@ public class Session {
 		return originBalance >= destinyBalance;
 	}
 	
+	public boolean transferAccountExists(String destinyAccountNumber) {
+		return accountDAO.selectByAccountNumber(destinyAccountNumber).getAccountNumber() != null;
+	}
+	
 	public void transfer(long amount, String destinyAccountNumber) {
 		String originAccountNumber = cardDAO.accountNumberAssociated(actualCardNumber);		
 		long updatedActualBalance = accountDAO.selectBalance(originAccountNumber) - amount;

@@ -48,8 +48,10 @@ public class Controller implements ActionListener, Observer {
 	}
 
 	public void init() {
-		operationFrame.addController(this);
+		operationFrame.addController(this);		
 		transferFrame.addController(this);
+		withdrawFrame.addController(this);
+		passwordFrame.addController(this);
 	}
 
 	@Override
@@ -75,6 +77,30 @@ public class Controller implements ActionListener, Observer {
 			session.setOption(2);
 			changeFrame(operationFrame, withdrawFrame);
 		}
+		if (e.getSource() == withdrawFrame.getButton10k()) {
+			// no implementado aun
+		}
+		if (e.getSource() == withdrawFrame.getButton30k()) {
+			// no implementado aun
+		}
+		if (e.getSource() == withdrawFrame.getButton60k()) {
+			// no implementado aun
+		}
+		if (e.getSource() == withdrawFrame.getButton80k()) {
+			// no implementado aun
+		}
+		if (e.getSource() == withdrawFrame.getButton100k()) {
+			// no implementado aun
+		}
+		if (e.getSource() == withdrawFrame.getButton200k()) {
+			// no implementado aun
+		}
+		if (e.getSource() == withdrawFrame.getButton300k()) {
+			// no implementado aun
+		}
+		if (e.getSource() == withdrawFrame.getOtherButton()) {
+			// no implementado aun
+		}
 		if (e.getSource() == transferFrame.getBtnContinue()) {
 			if (transferFrame.campoVacio()) {
 				JOptionPane.showMessageDialog(transferFrame, "Faltan campos por rellenar");
@@ -82,24 +108,15 @@ public class Controller implements ActionListener, Observer {
 				JOptionPane.showMessageDialog(transferFrame,
 						"La Transferencia minima es de" + " " + LimitValues.MIN_TRANSFER_AMOUNT);
 			} else if (!session.isTransferPosible(transferFrame.getTxtNumeroCuenta().getText())) {
-				JOptionPane.showMessageDialog(transferFrame,
-						"Saldo insuficiente" + " " + LimitValues.MIN_TRANSFER_AMOUNT);
+				JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+			} else if (!session.transferAccountExists(transferFrame.getTxtNumeroCuenta().getText())) {
+				JOptionPane.showMessageDialog(transferFrame, "La cuenta de destino no existe");
 			} else {
 				changeFrame(transferFrame, passwordFrame);
 			}
 		}
 		if (e.getSource() == passwordFrame.getPasswordButton()) {
-			if (session.passwordCorrect(passwordFrame.getPasswordField().getText())) {
-				if (session.getOptionSelected() == 1) {
-					Long amount = Long.parseLong(transferFrame.getTxtMonto().getText());
-					String destinyAccountNumber = transferFrame.getTxtNumeroCuenta().getText();
-					session.transfer(amount, destinyAccountNumber);
-				} else if (session.getOptionSelected() == 2) {
-					// no implementado aun
-				}
-			} else {
-				JOptionPane.showMessageDialog(passwordFrame, "contraseña incorrecta");
-			}
+			// no implementado aun
 		}
 	}
 }
