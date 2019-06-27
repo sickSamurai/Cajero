@@ -3,40 +3,23 @@ package logic.database.account;
 public class AccountDTO {
 
 	private String accountNumber;
-	private String cardNumber;
-	private long balanceAviable;
-	private boolean active;	
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
-	}
-
-	public void setBalanceAviable(long balanceAviable) {
-		this.balanceAviable = balanceAviable;
-	}
+	private long balance;
 
 	public String getAccountNumber() {
 		return accountNumber;
 	}
 
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
 	public long getBalance() {
-		return balanceAviable;
+		return balance;
 	}
 	
-	public boolean isActive() {
-		return active;
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}	
+
+	public void setBalance(long balanceAviable) {
+		this.balance = balanceAviable;
 	}
+	
 
 }

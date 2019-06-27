@@ -7,18 +7,20 @@ import java.util.Observer;
 
 import javax.swing.JOptionPane;
 
-import presentation.model.Model;
+import logic.ATM.Session;
+import logic.ATM.CardReader;
+import presentation.constant.LimitValues;
 import presentation.template.TemplateFrame;
 import presentation.view.*;
 
 public class Controller implements ActionListener, Observer {
 
-	private static Model model = Model.getInstance();
 	private EntryFrame entryFrame;
 	private OperationFrame operationFrame;
 	private TransferFrame transferFrame;
 	private WithdrawFrame withdrawFrame;
 	private PasswordFrame passwordFrame;
+	private Session session;
 
 	public void setEntryFrame(EntryFrame entryFrame) {
 		this.entryFrame = entryFrame;
@@ -44,47 +46,60 @@ public class Controller implements ActionListener, Observer {
 		actualFrame.dispose();
 		nextFrame.init();
 	}
-	
+
 	public void init() {
-		operationFrame.addController(this);	
+		operationFrame.addController(this);
 		transferFrame.addController(this);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		String cardNumber = model.getCardNumber();
-		if (!model.cardExists(cardNumber)) {
-			entryFrame.showWarningMessage("No hay tarjeta");
-		} else if (!model.accountState(cardNumber)) {
-			entryFrame.showWarningMessage("llame a su entidad");
+		String readedNumber = ((CardReader) o).readNumber();
+		session = new Session(readedNumber);
+		if (!session.cardExists(readedNumber)) {
+			entryFrame.showWarningMessage("La tarjeta no esta registrada");
+		} else if (!session.isCardActive()) {
+			entryFrame.showWarningMessage("La tarjeta esta desactivada");
 		} else {
-			model.setActualCardNumber(cardNumber);
-			model.setActualAccountNumber(cardNumber);			
 			changeFrame(entryFrame, operationFrame);
 		}
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == operationFrame.getTransferButton())
-			changeFrame(operationFrame, transferFrame);		
-		if (e.getSource() == operationFrame.getWithdrawButton())
+		if (e.getSource() == operationFrame.getTransferButton()) {
+			session.setOption(1);
+			changeFrame(operationFrame, transferFrame);
+		}
+		if (e.getSource() == operationFrame.getWithdrawButton()) {
+			session.setOption(2);
 			changeFrame(operationFrame, withdrawFrame);
+		}
 		if (e.getSource() == transferFrame.getBtnContinue()) {
-			if (transferFrame.getTxtNumeroCuenta().getText().equals("")
-					|| transferFrame.getTxtMonto().getText().equals("")) {
+			if (transferFrame.campoVacio()) {
 				JOptionPane.showMessageDialog(transferFrame, "Faltan campos por rellenar");
-			} else if (Integer.parseInt(transferFrame.getTxtMonto().getText()) < 50000) {
-				JOptionPane.showMessageDialog(transferFrame, "La Transferencia minima es de $50.000");
+			} else if (transferFrame.montoInsuficiente()) {
+				JOptionPane.showMessageDialog(transferFrame,
+						"La Transferencia minima es de" + " " + LimitValues.MIN_TRANSFER_AMOUNT);
+			} else if (!session.isTransferPosible(transferFrame.getTxtNumeroCuenta().getText())) {
+				JOptionPane.showMessageDialog(transferFrame,
+						"Saldo insuficiente" + " " + LimitValues.MIN_TRANSFER_AMOUNT);
 			} else {
-				long monto = Long.parseLong(transferFrame.getTxtMonto().getText());
-				String numeroCuentaDestino = (transferFrame.getTxtNumeroCuenta().getText());
-				
 				changeFrame(transferFrame, passwordFrame);
 			}
 		}
-
+		if (e.getSource() == passwordFrame.getPasswordButton()) {
+			if (session.passwordCorrect(passwordFrame.getPasswordField().getText())) {
+				if (session.getOptionSelected() == 1) {
+					Long amount = Long.parseLong(transferFrame.getTxtMonto().getText());
+					String destinyAccountNumber = transferFrame.getTxtNumeroCuenta().getText();
+					session.transfer(amount, destinyAccountNumber);
+				} else if (session.getOptionSelected() == 2) {
+					// no implementado aun
+				}
+			} else {
+				JOptionPane.showMessageDialog(passwordFrame, "contraseña incorrecta");
+			}
+		}
 	}
-
 }

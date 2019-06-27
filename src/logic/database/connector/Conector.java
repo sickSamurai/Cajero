@@ -14,15 +14,14 @@ public class Conector {
 	private static String user;
 	private static String password;
 
-	private Conector() {
-	}
+	private Conector() {}
 
 	public static void setValues(String urlDatabase, String user, String password) {
 		Conector.urlDatabase = urlDatabase;
 		Conector.user = user;
 		Conector.password = password;
 	}	
-
+	
 	public static Connection getConnection() {
 		return connection;
 	}

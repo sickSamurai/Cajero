@@ -1,9 +1,8 @@
 package launcher;
 
-import logic.cardReader.CardReader;
+import logic.ATM.CardReader;
 import logic.database.connector.Conector;
 import presentation.controller.Controller;
-import presentation.model.Model;
 import presentation.view.EntryFrame;
 import presentation.view.OperationFrame;
 import presentation.view.PasswordFrame;
@@ -18,7 +17,7 @@ public class Launcher {
 	private static WithdrawFrame withdrawFrame = new WithdrawFrame();
 	private static PasswordFrame passwordFrame = new PasswordFrame();
 	private static Controller controller = new Controller();
-	private static CardReader reader = CardReader.getInstance();	
+	private static CardReader reader = new CardReader();	
 
 	public static void initController() {
 		controller.setEntryFrame(entryFrame);

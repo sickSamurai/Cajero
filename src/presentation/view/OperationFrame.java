@@ -34,7 +34,7 @@ public class OperationFrame extends TemplateFrame {
 	private void setOperationTextProperties() {
 		operationText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.25));
 		operationText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
-		operationText.setForeground(ColorConstant.getBlack());
+		operationText.setForeground(ColorConstant.BLACK);
 		operationText.setFont(labelsFont);
 		operationText.setText("¿Qué desea hacer?");
 		operationText.setHorizontalAlignment(JLabel.CENTER);

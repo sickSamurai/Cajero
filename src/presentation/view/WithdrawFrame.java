@@ -10,8 +10,7 @@ import presentation.template.TemplateButton;
 import presentation.template.TemplateFrame;
 
 public class WithdrawFrame extends TemplateFrame {
-
-    private Font labelsFont;
+    
     private JLabel amountText;
     private JButton button10k;
     private JButton button30k;
@@ -21,6 +20,7 @@ public class WithdrawFrame extends TemplateFrame {
     private JButton button200k;
     private JButton button300k;
     private JButton otherButton;
+    private Font labelsFont;
 
     public WithdrawFrame() {
         amountText = new JLabel();
@@ -95,7 +95,7 @@ public class WithdrawFrame extends TemplateFrame {
     private void setAmountTextProperties() {
         amountText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.15));
         amountText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
-        amountText.setForeground(ColorConstant.getBlack());
+        amountText.setForeground(ColorConstant.BLACK);
         amountText.setFont(labelsFont);
         amountText.setText("Elige un monto");
         amountText.setHorizontalAlignment(JLabel.CENTER);

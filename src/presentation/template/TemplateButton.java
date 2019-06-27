@@ -9,8 +9,8 @@ public class TemplateButton extends JButton {
 
     public TemplateButton() {
         setFocusPainted(false);
-        setBackground(ColorConstant.getBlack());
-        setForeground(ColorConstant.getWhite());
+        setBackground(ColorConstant.BLACK);
+        setForeground(ColorConstant.WHITE);
         setFont(new Font("Comic Sans MS", Font.BOLD, 25));
     }
 

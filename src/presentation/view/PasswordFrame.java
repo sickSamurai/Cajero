@@ -18,6 +18,14 @@ public class PasswordFrame extends TemplateFrame {
 	private JPasswordField passwordField;
 	private JButton passwordButton;
 
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}	
+
+	public JButton getPasswordButton() {
+		return passwordButton;
+	}	
+
 	public PasswordFrame() {
 		labelsFont = new Font("Comic Sans MS", Font.BOLD, 70);
 		passwordText = new JLabel();
@@ -42,7 +50,7 @@ public class PasswordFrame extends TemplateFrame {
 	private void setPasswordTextProperties() {
 		passwordText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.25));
 		passwordText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
-		passwordText.setForeground(ColorConstant.getBlack());
+		passwordText.setForeground(ColorConstant.BLACK);
 		passwordText.setFont(labelsFont);
 		passwordText.setText("Ingrese su contraseña");
 		passwordText.setHorizontalAlignment(JLabel.CENTER);

@@ -21,7 +21,7 @@ public abstract class TemplateFrame extends JFrame {
         setUndecorated(true);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setBackground(ColorConstant.getWhite());
+        getContentPane().setBackground(ColorConstant.WHITE);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setResizable(false);
         setVisible(true);

@@ -23,7 +23,7 @@ public class EntryFrame extends TemplateFrame {
 	private void setWelcomeTextProperties() {
 		welcomeText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.25));
 		welcomeText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
-		welcomeText.setForeground(ColorConstant.getBlack());
+		welcomeText.setForeground(ColorConstant.BLACK);
 		welcomeText.setFont(labelsFont);
 		welcomeText.setText("Bienvenido al cajero UD");
 		welcomeText.setHorizontalAlignment(JLabel.CENTER);
@@ -33,7 +33,7 @@ public class EntryFrame extends TemplateFrame {
 	private void setInsertTextProperties() {
 		insertText.setLocation(welcomeText.getX(), welcomeText.getY() + welcomeText.getHeight() + 20);
 		insertText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.15));
-		insertText.setForeground(ColorConstant.getBlack());
+		insertText.setForeground(ColorConstant.BLACK);
 		insertText.setFont(labelsFont);
 		insertText.setText("Inserte la tarjeta");
 		insertText.setHorizontalAlignment(JLabel.CENTER);
@@ -43,7 +43,7 @@ public class EntryFrame extends TemplateFrame {
 	private void setWarningTextProperties() {
 		warningText.setLocation((int) (getWidth() * 0.15), (int) (getHeight() * 0.40));
 		warningText.setSize((int) (getWidth() * 0.70), (int) (getHeight() * 0.20));
-		warningText.setForeground(ColorConstant.getBlack());
+		warningText.setForeground(ColorConstant.BLACK);
 		warningText.setFont(labelsFont);
 		warningText.setHorizontalAlignment(JLabel.CENTER);
 		warningText.setVerticalAlignment(JLabel.CENTER);

@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import presentation.constant.LimitValues;
 import presentation.template.TemplateButton;
 import presentation.template.TemplateFrame;
 
@@ -20,7 +21,7 @@ public class TransferFrame extends TemplateFrame {
 	private JLabel lblMonto;
 	private JTextField txtNumeroCuenta;
 	private JTextField txtMonto;
-	private JButton btnContinue;	
+	private JButton btnContinue;
 
 	public TransferFrame() {
 		this.font = new Font("Comic Sans MS", Font.BOLD, 25);
@@ -30,12 +31,12 @@ public class TransferFrame extends TemplateFrame {
 		this.txtNumeroCuenta = new JTextField();
 		this.btnContinue = new TemplateButton();
 		this.validarTexto(txtMonto);
-		this.validarTexto(txtNumeroCuenta);		
+		this.validarTexto(txtNumeroCuenta);
 	}
-	
+
 	public JButton getBtnContinue() {
 		return btnContinue;
-	} 
+	}
 
 	public JTextField getTxtNumeroCuenta() {
 		return txtNumeroCuenta;
@@ -70,13 +71,13 @@ public class TransferFrame extends TemplateFrame {
 		this.txtMonto.setSize((int) (this.getWidth() * 0.3), (int) (this.getHeight() * 0.05));
 		this.txtMonto.setLocation((int) (this.getWidth() * 0.35), (int) (this.getHeight() * 0.60));
 	}
-	
+
 	private void setBtnContinueProperties() {
 		this.btnContinue.setSize((int) (this.getWidth() * 0.20), (int) (this.getHeight() * 0.1));
 		this.btnContinue.setLocation((int) (this.getWidth() * 0.40), (int) (this.getHeight() * 0.80));
 		this.btnContinue.setText("Continuar");
 	}
-	
+
 	private void validarTexto(JTextField txt) {
 		txt.addKeyListener(new KeyAdapter() {
 			@Override
@@ -88,7 +89,15 @@ public class TransferFrame extends TemplateFrame {
 			}
 		});
 	}
+
+	public boolean campoVacio() {
+		return getTxtNumeroCuenta().getText().equals("") || getTxtMonto().getText().equals("");
+	}
 	
+	public boolean montoInsuficiente() {
+		return Long.parseLong(getTxtMonto().getText()) < LimitValues.MIN_TRANSFER_AMOUNT;
+	}	
+
 	@Override
 	public void setComponentsProperties() {
 		this.setLblNumeroCuentaProperties();
@@ -96,8 +105,8 @@ public class TransferFrame extends TemplateFrame {
 		this.setTxtNumeroCuentaProperties();
 		this.setTxtMontoProperties();
 		this.setBtnContinueProperties();
-	}	
-	
+	}
+
 	@Override
 	public void addComponents() {
 		this.add(lblNumeroCuenta);
@@ -106,9 +115,9 @@ public class TransferFrame extends TemplateFrame {
 		this.add(txtMonto);
 		this.add(btnContinue);
 	}
-	
+
 	public void addController(ActionListener listener) {
 		btnContinue.addActionListener(listener);
 	}
-		
+
 }

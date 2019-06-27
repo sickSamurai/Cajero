@@ -2,23 +2,41 @@ package logic.database.card;
 
 public class CardDTO {
 
-	private String clave;
-	private String numeroTarjeta;		
+	private String cardNumber;
+	private String accountNumber;
+	private String password;
+	private boolean active;
 	
-	public void setClave(String clave) {
-		this.clave = clave;
+	public String getCardNumber() {
+		return cardNumber;
+	}
+	
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 
-	public void setNumeroTarjeta(String numeroTarjeta) {
-		this.numeroTarjeta = numeroTarjeta;
+	public boolean isActive() {
+		return active;
 	}
 
-	public String getClave() {
-		return clave;
+	public void setCardNumber(String numeroTarjeta) {
+		this.cardNumber = numeroTarjeta;
+	}
+	
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
-	public String getNumeroTarjeta() {
-		return numeroTarjeta;
+	public void setPassword(String clave) {
+		this.password = clave;
+	}
+
+	public void setActive(boolean activa) {
+		this.active = activa;
 	}
 
 }
