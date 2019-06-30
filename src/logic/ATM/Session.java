@@ -49,12 +49,19 @@ public class Session {
 		return cardDAO.passwordCorrect(actualCardNumber, password);
 	}
 
-	public boolean isTransferPosible(String destinyAccountNumber) {
+	public boolean isTransferPosible(long amount) {
 		String originAccountNumber = cardDAO.accountNumberAssociated(actualCardNumber);
-		long originBalance = accountDAO.selectBalance(originAccountNumber);
-		long destinyBalance = accountDAO.selectBalance(destinyAccountNumber);
-		return originBalance >= destinyBalance;
+		long originBalance = accountDAO.selectBalance(originAccountNumber);		
+		return originBalance >= amount;
 	}
+        public boolean isSameAccount(String destinyAccountNumber){
+                String originAccountNumber = cardDAO.accountNumberAssociated(actualCardNumber);
+                String destinyAccount = destinyAccountNumber;
+                System.out.println(originAccountNumber);
+                System.out.println(destinyAccount);
+                return originAccountNumber.equals(destinyAccount);
+                               
+        }
 
 	public boolean transferAccountExists(String destinyAccountNumber) {
 		return accountDAO.selectByAccountNumber(destinyAccountNumber).getAccountNumber() != null;

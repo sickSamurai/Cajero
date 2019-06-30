@@ -22,6 +22,7 @@ public class WithdrawFrame extends TemplateFrame {
     private JButton button300k;
     private JButton otherButton;
     private Font labelsFont;
+   
 
     public WithdrawFrame() {
         amountText = new JLabel();

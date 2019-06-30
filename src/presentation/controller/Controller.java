@@ -20,8 +20,11 @@ public class Controller implements ActionListener, Observer {
 	private TransferFrame transferFrame;
 	private WithdrawFrame withdrawFrame;
 	private PasswordFrame passwordFrame;
+        private EndFrame endFrame;
 	private Session session;
+        private long selectedAmount;
 
+            
 	public Controller() {
 		session = new Session();
 	}
@@ -45,6 +48,9 @@ public class Controller implements ActionListener, Observer {
 	public void setPasswordFrame(PasswordFrame passwordFrame) {
 		this.passwordFrame = passwordFrame;
 	}
+        public void setEndFrame(EndFrame endFrame) {
+		this.endFrame = endFrame;
+	}
 
 	public void changeFrame(TemplateFrame actualFrame, TemplateFrame nextFrame) {
 		actualFrame.dispose();
@@ -56,6 +62,7 @@ public class Controller implements ActionListener, Observer {
 		transferFrame.addController(this);
 		withdrawFrame.addController(this);
 		passwordFrame.addController(this);
+                
 	}
 
 	@Override
@@ -76,34 +83,82 @@ public class Controller implements ActionListener, Observer {
 		if (e.getSource() == operationFrame.getTransferButton()) {
 			session.setOperation(1);
 			changeFrame(operationFrame, transferFrame);
+                        
 		}
 		if (e.getSource() == operationFrame.getWithdrawButton()) {
 			session.setOperation(2);
 			changeFrame(operationFrame, withdrawFrame);
+                        
 		}
 		if (e.getSource() == withdrawFrame.getButton10k()) {
-			// no implementado aun
+                        selectedAmount = 10000;			
+                    if (!session.isTransferPosible(selectedAmount)) {
+                            JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+                    }else{                        
+                        changeFrame(withdrawFrame, passwordFrame);
+                    }
+                        
 		}
 		if (e.getSource() == withdrawFrame.getButton30k()) {
-			// no implementado aun
+			selectedAmount = 30000;
+                    if (!session.isTransferPosible(selectedAmount)) {
+                            JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+                    }else{                        
+                        changeFrame(withdrawFrame, passwordFrame);
+                    }
+                       
 		}
 		if (e.getSource() == withdrawFrame.getButton60k()) {
-			// no implementado aun
+			selectedAmount = 60000;
+                    if (!session.isTransferPosible(selectedAmount)) {
+                            JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+                    }else{                        
+                        changeFrame(withdrawFrame, passwordFrame);
+                    }
+                        
 		}
 		if (e.getSource() == withdrawFrame.getButton80k()) {
-			// no implementado aun
+			selectedAmount = 80000;
+                    if (!session.isTransferPosible(selectedAmount)) {
+                            JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+                    }else{                        
+                        changeFrame(withdrawFrame, passwordFrame);
+                    }
+                        
 		}
 		if (e.getSource() == withdrawFrame.getButton100k()) {
-			// no implementado aun
+                        selectedAmount = 100000;
+                    if (!session.isTransferPosible(selectedAmount)) {
+                            JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+                    }else{                        
+                        changeFrame(withdrawFrame, passwordFrame);
+                    }
+                        
 		}
 		if (e.getSource() == withdrawFrame.getButton200k()) {
-			// no implementado aun
+                        selectedAmount = 200000;
+                    if (!session.isTransferPosible(selectedAmount)) {
+                        JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+                    }else{                        
+                        changeFrame(withdrawFrame, passwordFrame);
+                    }                        
 		}
 		if (e.getSource() == withdrawFrame.getButton300k()) {
-			// no implementado aun
-		}
+                        selectedAmount = 300000;
+                    if (!session.isTransferPosible(selectedAmount)) {
+                            JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+                    }else{                        
+                        changeFrame(withdrawFrame, passwordFrame);
+                    }                            
+                }
 		if (e.getSource() == withdrawFrame.getOtherButton()) {
-			// no implementado aun
+                    selectedAmount = Long.parseLong(JOptionPane.showInputDialog(withdrawFrame , "Inserte el monto:"));
+                    if (!session.isTransferPosible(selectedAmount)) {
+				JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
+                    }else{                        
+                        changeFrame(withdrawFrame, passwordFrame);
+                    }
+                                    
 		}
 		if (e.getSource() == transferFrame.getBtnContinue()) {
 			if (transferFrame.campoVacio()) {
@@ -111,16 +166,36 @@ public class Controller implements ActionListener, Observer {
 			} else if (transferFrame.montoInsuficiente()) {
 				JOptionPane.showMessageDialog(transferFrame,
 						"La Transferencia minima es de" + " " + LimitValues.MIN_TRANSFER_AMOUNT);
-			} else if (!session.isTransferPosible(transferFrame.getTxtNumeroCuenta().getText())) {
+			} else if (!session.isTransferPosible(Long.parseLong(transferFrame.getTxtMonto().getText()))) {
 				JOptionPane.showMessageDialog(transferFrame, "Saldo insuficiente");
 			} else if (!session.transferAccountExists(transferFrame.getTxtNumeroCuenta().getText())) {
 				JOptionPane.showMessageDialog(transferFrame, "La cuenta de destino no existe");
-			} else {
-				changeFrame(transferFrame, passwordFrame);
-			}
+			}else if(session.isSameAccount(transferFrame.getTxtNumeroCuenta().getText())){
+                                JOptionPane.showMessageDialog(transferFrame, "No puede transferir dinero a esta cuenta"); 
+                        }else {
+                            selectedAmount= Long.parseLong(transferFrame.getTxtMonto().getText());
+                            changeFrame(transferFrame, passwordFrame);
+                        }
 		}
 		if (e.getSource() == passwordFrame.getPasswordButton()) {
-			// no implementado aun
+                    int contador = 0;
+                    if(passwordFrame.campoVacio()){
+                        JOptionPane.showMessageDialog(passwordFrame, "inserte una contraseña");                        
+                    }else if (contador == 2){
+                        session.desactiveCard();
+                        changeFrame(passwordFrame, endFrame); 
+                        endFrame.showWarningMessage("Su tarjeta ha sido desactivada");                                               
+                    }else if (!session.isPasswordCorrect(passwordFrame.getPasswordField().getText())){
+                        JOptionPane.showMessageDialog(passwordFrame, "contraseña incorrecta");
+                        contador++;                        
+                    }else if (session.getOperationSelected()==2){                        
+                        session.withdraw(selectedAmount);
+                        changeFrame(passwordFrame, endFrame); 
+                    }else if (session.getOperationSelected()==1){                        
+                        session.transfer(selectedAmount , transferFrame.getTxtNumeroCuenta().getText());
+                        changeFrame(passwordFrame, endFrame); 
+                    }
+                    
 		}
 	}
 }

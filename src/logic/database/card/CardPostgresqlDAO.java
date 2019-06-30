@@ -24,7 +24,7 @@ public class CardPostgresqlDAO implements ICardDAO {
 			if (result.next()) {
 				card.setCardNumber(result.getString("numero_tarjeta"));
 				card.setAccountNumber(result.getString("numero_cuenta"));
-				card.setPassword(result.getString("clave_acceso"));
+				card.setPassword(result.getString("clave"));
 				card.setActive(result.getBoolean("esta_activa"));
 			}
 		} catch (SQLException e) {

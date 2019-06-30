@@ -76,5 +76,8 @@ public class PasswordFrame extends TemplateFrame {
 		passwordButton.setSize(passwordField.getSize());
 		passwordButton.setText("ingresar");
 	}
+        public boolean campoVacio() {
+		return getPasswordField().getText().equals("") || getPasswordField().getText().equals("");
+	}
 
 }

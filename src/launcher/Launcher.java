@@ -3,6 +3,7 @@ package launcher;
 import logic.ATM.CardReader;
 import logic.database.connector.Conector;
 import presentation.controller.Controller;
+import presentation.view.EndFrame;
 import presentation.view.EntryFrame;
 import presentation.view.OperationFrame;
 import presentation.view.PasswordFrame;
@@ -16,6 +17,7 @@ public class Launcher {
 	private static TransferFrame transferFrame = new TransferFrame();
 	private static WithdrawFrame withdrawFrame = new WithdrawFrame();
 	private static PasswordFrame passwordFrame = new PasswordFrame();
+        private static EndFrame endframe = new EndFrame();
 	private static Controller controller = new Controller();
 	private static CardReader reader = new CardReader();	
 
@@ -25,6 +27,7 @@ public class Launcher {
 		controller.setTransferFrame(transferFrame);
 		controller.setWithdrawFrame(withdrawFrame);
 		controller.setPasswordFrame(passwordFrame);
+                controller.setEndFrame(endframe);
 		controller.init();
 	}
 
@@ -34,7 +37,7 @@ public class Launcher {
 	}
 	
 	public static void setConectorValues() {
-		Conector.setValues("jdbc:postgresql://localhost/banco", "postgres", "1957");
+		Conector.setValues("jdbc:postgresql://localhost/banco", "postgres", "5376052");
 	}
 
 	public static void main(String[] args) {

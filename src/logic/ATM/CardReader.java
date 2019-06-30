@@ -14,7 +14,7 @@ public class CardReader extends Observable implements Runnable {
 	private final Thread vigilantThread;
 
 	public CardReader() {
-		file = new File("D:\\tarjeta\\numeroTarjeta.txt");
+		file = new File("C:\\tarjeta\\numeroTarjeta.txt");
 		vigilantThread = new Thread(this);
 	}	
 
@@ -37,7 +37,7 @@ public class CardReader extends Observable implements Runnable {
 				Thread.currentThread().interrupt();
 			}
 		}
-		setChanged();
+        setChanged();
         notifyObservers();
 	}
 
